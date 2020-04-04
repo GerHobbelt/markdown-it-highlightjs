@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/markdown-it-highlightjs",
-  "version": "2.0.0-5",
+  "version": "3.1.0-5",
   "description": "Preset to use highlight.js with markdown-it.",
   "keywords": [
     "markdown-it-plugin"
@@ -28,16 +28,14 @@
     "pub": "npm publish --access public"
   },
   "dependencies": {
-    "highlight.js": "^9.16.2",
-    "lodash.assign": "^4.2.0",
-    "lodash.flow": "^3.5.0"
+    "highlight.js": "9.18.1",
+    "lodash.flow": "3.5.0"
   },
   "devDependencies": {
-    "@gerhobbelt/babel-cli": "7.2.1-26",
-    "@gerhobbelt/babel-core": "^7.2.1-26",
-    "@gerhobbelt/debug": "^4.1.1-5",
+    "@babel/cli": "7.2.1-26",
+    "@babel/core": "^7.2.1-26",
     "@gerhobbelt/markdown-it": "10.0.0-30",
-    "slash": "^3.0.0",
+    "slash": "3.0.0",
     "standard": "14.3.1"
   }
 }

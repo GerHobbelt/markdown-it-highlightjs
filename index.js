@@ -1,42 +1,50 @@
-import assign from 'lodash.assign';
-import flow from 'lodash.flow';
-import hljs from 'highlight.js';
+const hljs = require('highlight.js')
 
-const maybe = f => (...args) => {
+const maybe = f => {
   try {
-    return f(...args);
+    return f()
   } catch (e) {
-    return false;
+    return false
   }
-};
+}
 
-const get = name => x => x[name];
+// Allow registration of other languages.
+const registerLangs = (register) => register &&
+  Object.entries(register).map(([lang, pack]) => { hljs.registerLanguage(lang, pack) })
 
-const maybeValue = f => maybe(flow(f, get('value'))); // Highlight with given language.
+// Highlight with given language.
+const highlight = (code, lang) =>
+  maybe(() => hljs.highlight(lang || 'plaintext', code, true).value) || ''
 
+// Highlight with given language or automatically.
+const highlightAuto = (code, lang) =>
+  lang
+    ? highlight(code, lang)
+    : maybe(() => hljs.highlightAuto(code).value) || ''
 
-const highlight = (code, lang) => maybeValue(hljs.highlight)(lang, code, true) || ''; // Highlight with given language or automatically.
-
-
-const highlightAuto = (code, lang) => lang ? highlight(code, lang) : maybeValue(hljs.highlightAuto)(code) || ''; // Wrap a render function to add `hljs` class to code blocks.
-
-
-const wrap = render => function (...args) {
-  return render.apply(this, args).replace('<code class="', '<code class="hljs ').replace('<code>', '<code class="hljs">');
-};
+// Wrap a render function to add `hljs` class to code blocks.
+const wrap = render =>
+  function (...args) {
+    return render.apply(this, args)
+      .replace('<code class="', '<code class="hljs ')
+      .replace('<code>', '<code class="hljs">')
+  }
 
 const highlightjs = (md, opts) => {
-  opts = assign({}, highlightjs.defaults, opts);
-  md.options.highlight = opts.auto ? highlightAuto : highlight;
-  md.renderer.rules.fence = wrap(md.renderer.rules.fence);
+  opts = Object.assign({}, highlightjs.defaults, opts)
+  registerLangs(opts.register)
+
+  md.options.highlight = opts.auto ? highlightAuto : highlight
+  md.renderer.rules.fence = wrap(md.renderer.rules.fence)
 
   if (opts.code) {
-    md.renderer.rules.code_block = wrap(md.renderer.rules.code_block);
+    md.renderer.rules.code_block = wrap(md.renderer.rules.code_block)
   }
-};
+}
 
 highlightjs.defaults = {
   auto: true,
   code: true
-};
-export default highlightjs;
+}
+
+module.exports = highlightjs
