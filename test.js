@@ -1,5 +1,5 @@
 const { strictEqual: equal } = require('assert')
-const md = require('markdown-it')
+const md = require('@gerhobbelt/markdown-it')
 const highlightjs = require('./')
 
 equal(

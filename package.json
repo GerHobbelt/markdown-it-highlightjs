@@ -1,6 +1,6 @@
 {
   "name": "@gerhobbelt/markdown-it-highlightjs",
-  "version": "3.1.0-5",
+  "version": "3.1.0-7",
   "description": "Preset to use highlight.js with markdown-it.",
   "keywords": [
     "markdown-it-plugin"
@@ -11,6 +11,8 @@
     "name": "Valérian Galliat",
     "url": "http://val.codejam.info/"
   },
+  "type": "module",
+  "main": "index.js",
   "files": [
     "README.md",
     "UNLICENSE",
@@ -21,10 +23,9 @@
     "url": "https://github.com/valeriangalliat/markdown-it-highlightjs.git"
   },
   "scripts": {
-    "build": "babel index.es6.js -o index.js",
-    "lint": "standard index.es6.js test.js",
-    "prepublish": "npm run build",
-    "test": "npm run lint && npm run build && babel-node test.js",
+    "lint": "standard index.js test.js",
+    "prepare": "npm test",
+    "test": "npm run lint && node test",
     "pub": "npm publish --access public"
   },
   "dependencies": {
@@ -32,10 +33,7 @@
     "lodash.flow": "3.5.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.1-26",
-    "@babel/core": "^7.2.1-26",
-    "@gerhobbelt/markdown-it": "10.0.0-30",
-    "slash": "3.0.0",
-    "standard": "14.3.1"
+    "@gerhobbelt/markdown-it": "10.0.0-31",
+    "standard": "14.3.3"
   }
 }
