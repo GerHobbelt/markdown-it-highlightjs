@@ -23,17 +23,18 @@
     "url": "https://github.com/valeriangalliat/markdown-it-highlightjs.git"
   },
   "scripts": {
+    "build": "npm test",
     "lint": "standard index.js test.js",
-    "prepare": "npm test",
+    "orig-prepare": "npm test",
     "test": "npm run lint && node test",
     "pub": "npm publish --access public"
   },
   "dependencies": {
-    "highlight.js": "9.18.1",
+    "@gerhobbelt/highlight.js": "10.0.2-18",
     "lodash.flow": "3.5.0"
   },
   "devDependencies": {
-    "@gerhobbelt/markdown-it": "10.0.0-31",
+    "@gerhobbelt/markdown-it": "10.0.0-32",
     "standard": "14.3.3"
   }
 }

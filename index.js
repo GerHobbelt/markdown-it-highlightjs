@@ -1,4 +1,4 @@
-const hljs = require('highlight.js')
+const hljs = require('@gerhobbelt/highlight.js')
 
 const maybe = f => {
   try {
